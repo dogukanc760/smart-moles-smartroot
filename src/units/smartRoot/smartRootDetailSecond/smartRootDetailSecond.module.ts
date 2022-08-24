@@ -11,6 +11,6 @@ import { SmartRootDetailSecondService } from './smartRootDetailSecond.service';
   imports: [TypeOrmModule.forFeature([SmartRootDetailSecond])],
   providers: [SmartRootDetailSecondService],
   controllers: [SmartRootDetailSecondController],
-  exports: [],
+  exports: [SmartRootDetailSecondService],
 })
 export class SmartRootDetailSecondModule {}

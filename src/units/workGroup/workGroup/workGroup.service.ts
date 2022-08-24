@@ -31,6 +31,13 @@ export class WorkGroupService {
       .then((datas) => datas.map((e) => WorkGroupDTO.fromEntity(e)));
   }
 
+  public async getByGatewayOne(id: string): Promise<WorkGroupDTO> {
+    return await this.repo
+    .findOne({ where:{GatewayID: id} })
+    .then((e) => WorkGroupDTO.fromEntity(e));
+     
+  }
+
   // save new device
   public async create(dto: WorkGroupDTO): Promise<WorkGroupDTO> {
     return await this.repo

@@ -33,9 +33,14 @@ export class SmartRootClassificationService {
 
   // save new device
   public async create(dto: SmartRootClassificationDTO): Promise<SmartRootClassificationDTO> {
-    return await this.repo
+    try {
+      return await this.repo
       .save(SmartRootClassificationDTO.toEntity(dto))
       .then((e) => SmartRootClassificationDTO.fromEntity(e));
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 
   // update device

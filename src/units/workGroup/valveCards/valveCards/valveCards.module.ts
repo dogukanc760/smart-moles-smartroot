@@ -8,6 +8,6 @@ import { ValveCardsService } from './valveCards.service';
   imports: [TypeOrmModule.forFeature([ValveCards])],
   providers: [ValveCardsService],
   controllers: [ValveCardsController],
-  exports: [],
+  exports: [ValveCardsService],
 })
 export class ValveCardsModule {}

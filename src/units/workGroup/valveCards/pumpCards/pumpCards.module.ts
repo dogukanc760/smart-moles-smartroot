@@ -8,6 +8,6 @@ import { PumpCardsService } from './pumpCards.service';
   imports: [TypeOrmModule.forFeature([PumpCards])],
   providers: [PumpCardsService],
   controllers: [PumpCardsController],
-  exports: [],
+  exports: [PumpCardsService],
 })
 export class PumpCardsModule {}

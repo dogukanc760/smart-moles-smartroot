@@ -8,6 +8,6 @@ import { SmartRootClassificationService } from './smartRootClassification.servic
   imports: [TypeOrmModule.forFeature([SmartRootClassification])],
   providers: [SmartRootClassificationService],
   controllers: [SmartRootClassificationController],
-  exports: [],
+  exports: [SmartRootClassificationService],
 })
 export class SmartRootClassificationModule {}

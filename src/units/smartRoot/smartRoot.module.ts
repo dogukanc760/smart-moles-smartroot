@@ -12,6 +12,6 @@ import { SmartRootService } from './smartRoot.service';
   imports: [TypeOrmModule.forFeature([SmartRoot])],
   providers: [SmartRootService],
   controllers: [SmartRootController],
-  exports: [],
+  exports: [SmartRootService],
 })
 export class SmartRootModule {}

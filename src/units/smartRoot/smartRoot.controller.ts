@@ -10,6 +10,7 @@ import {
   } from '@nestjs/common';
   import { ApiTags } from '@nestjs/swagger';
   import { TransformInterceptor } from 'src/libs/api-results/standart-results';
+import { RootDetect } from 'src/operations/smartRoot/rootDetect.service';
 import { SmartRootDTO } from './smartRoot.dto';
 import { SmartRootService } from './smartRoot.service';
  
@@ -35,7 +36,6 @@ import { SmartRootService } from './smartRoot.service';
       return await this.smartRootService.getByGateway(id);
     }
   
-    
   
     @Post()
     public async create(@Body() dto: SmartRootDTO): Promise<SmartRootDTO> {
