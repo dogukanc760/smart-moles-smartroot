@@ -2,16 +2,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString, IsBoolean } from 'class-validator';
 import { SmartRootClassification } from 'src/model/SmartRoot/smartRootClassification.entity';
 
-export class SmartRootClassificationDTO
-  implements Readonly<SmartRootClassificationDTO>
+export class SmartRootCreateClassificationDTO
+  implements Readonly<SmartRootCreateClassificationDTO>
 {
-  @ApiProperty()
-  contentId: string;
-  @ApiProperty()
+
+  @ApiProperty({ required: false })
   createdAt: Date;
-  @ApiProperty()
+  @ApiProperty({ required: false })
   updatedAt: Date;
-  @ApiProperty()
+  @ApiProperty({ required: false })
   lastChangedDateTime: Date;
   @ApiProperty()
   @IsString()
@@ -28,13 +27,12 @@ export class SmartRootClassificationDTO
   @ApiProperty()
   @IsString()
   SensorClasses: string[];
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsBoolean()
   isDeleted: boolean;
 
-  public static from(dto: Partial<SmartRootClassificationDTO>) {
-    const it = new SmartRootClassificationDTO();
-    it.contentId = dto.contentId;
+  public static from(dto: Partial<SmartRootCreateClassificationDTO>) {
+    const it = new SmartRootCreateClassificationDTO();
 
     it.SmartRootID = dto.SmartRootID;
     it.Sensors = dto.Sensors;
@@ -50,7 +48,6 @@ export class SmartRootClassificationDTO
 
   public static fromEntity(entity: SmartRootClassification) {
     return this.from({
-      contentId: entity.ContentID,
       Sensors: entity.Sensors,
       GatewayID: entity.GatewayID,
       SensorClasses: entity.SensorClasses,
@@ -63,14 +60,13 @@ export class SmartRootClassificationDTO
     });
   }
 
-  public static toEntity(dto: Partial<SmartRootClassificationDTO>) {
+  public static toEntity(dto: Partial<SmartRootCreateClassificationDTO>) {
     const givenData = new SmartRootClassification();
     givenData.SmartRootID = dto.SmartRootID;
-    givenData.ContentID = dto.contentId;
     givenData.SensorClasses = dto.SensorClasses;
     givenData.SensorDatas = dto.SensorDatas;
     givenData.Sensors = dto.Sensors;
-
+    givenData.GatewayID = dto.GatewayID;
     givenData.updatedAt = new Date();
     givenData.lastChangedDateTime = new Date();
     givenData.isDeleted = false;

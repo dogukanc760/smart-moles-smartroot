@@ -100,7 +100,7 @@ export class RootDetect {
               `${gateway.Name} adlı gatewayde sulama yapılmıyor.`,
             );
           }
-        }, 1100);
+        }, 2500);
 
         // ARTIK ELIMIZDE VANASI KAPALI OLAN VE SMARTROOT İÇİN İŞLEMLER YAPABİLECEĞİMİZ WORKGROUPLAR VAR
         // ŞIMDI ISE BU WORK GROUPLARIN BAĞLI OLDUĞU GATEWAYLERİ BULACAĞIZ.
@@ -217,11 +217,11 @@ export class RootDetect {
               //   val = lastChangeDataArray[index] - lastChangeDataArray[0];
               //   dataRateByGreaterThan.push(val);
               // }
-              lastChangeDataArray.map((val, index) =>{
+              lastChangeDataArray.map((val, index) => {
                 let lastData = 0;
                 lastData = lastChangeDataArray[0] - val;
                 dataRateByGreaterThan.push(lastData);
-              })
+              });
               lastChangeDataArray.push(deltaData);
 
               // ŞİMDİ ORANLARINI BULACAĞIZ VE SINIFLANDIRMA TABLOSUNA YAZACAĞIZ
@@ -234,17 +234,17 @@ export class RootDetect {
 
               let dataRateByNumber = Array<Number>();
               let classificationRate = Array<Number>();
-              for (
-                let index = 0;
-                index < dataRateByGreaterThan.length;
-                index++
-              ) {
-                total += parseFloat(dataRateByGreaterThan[index].toString());
-              }
+              // for (
+              //   let index = 0;
+              //   index < dataRateByGreaterThan.length;
+              //   index++
+              // ) {
+              //   total += parseFloat(dataRateByGreaterThan[index].toString());
+              // }
 
-              dataRateByGreaterThan.map((val, index)=>{
+              dataRateByGreaterThan.map((val, index) => {
                 total += Number(val);
-              })
+              });
               // ORANLARIN ORTALAMASINI BULDUK VE MUTLAK ORANI ELDE ETTİK
               // console.log(
               //   'ORANLARIN ORTALAMASINI BULDUK VE MUTLAK ORANI ELDE ETTİK',
@@ -269,81 +269,81 @@ export class RootDetect {
               //   index < dataRateByGreaterThan.length;
               //   index++
               // ) {
-                
 
               //   //dataRateByNumber.push(lastRate);
               // }
               dataRateByGreaterThan.map((val, index) => {
-                    // HER BİR VERİNİN MUTLAK ORANA OLAN YÜZDESEL UZAKLIĞINI DA BULDUK ŞİMDİ BUNLARI SINIFLAYACAĞIZ.
+                // HER BİR VERİNİN MUTLAK ORANA OLAN YÜZDESEL UZAKLIĞINI DA BULDUK ŞİMDİ BUNLARI SINIFLAYACAĞIZ.
                 // YÜZDESEL OLARAK 100 ÜZERİNDEN 5 PAYDAYA BÖLÜP YÜZDELİK ARALIKLARINA GÖRE SINIFLIYORUZ
                 // console.log(
                 //   'HER BİR VERİNİN MUTLAK ORANA OLAN YÜZDESEL UZAKLIĞINI DA BULDUK ŞİMDİ BUNLARI SINIFLAYACAĞIZ.',
                 // );
-                  this.logger.verbose(`${smart.Name} adlı SmartRoot Kurulumuna ait veriler sınıflanıyor. ${dataRateByGreaterThan.length}`);
-                  if(index==5){
-                    exit(1);
-                  }
-                  lastRate = (total * Number(val)) / 100;
-                  if (lastRate < lastRate * 1.2) {
-                    this.logger.debug(`En az  ölçekte kök var`)
-                    classificationRate.push(1);
-                  }
-                  if (lastRate < lastRate * 1.4 && lastRate > lastRate * 1.2) {
-                    this.logger.debug(`Az ölçekte kök var`)
-                    classificationRate.push(2);
-                  }
-  
-                  if (lastRate < lastRate * 1.6 && lastRate > lastRate * 1.4) {
-                    this.logger.debug(` Orta ölçekte kök var`)
-                    classificationRate.push(3);
-                  }
-  
-                  if (lastRate < lastRate * 1.8 && lastRate > lastRate * 1.6) {
-                    this.logger.debug(` Çok ölçekte kök var`)
-                    classificationRate.push(4);
-                  }
-  
-                  if (lastRate > lastRate * 1.8) {
-                    this.logger.debug(` En çok kök bölgesi`)
-                    classificationRate.push(5);
-                  }
-                  else {
-                    classificationRate.push(3);
-                  }  
+                // this.logger.verbose(`${smart.Name} adlı SmartRoot Kurulumuna ait veriler sınıflanıyor. ${dataRateByGreaterThan.length}`);
+                // if(index==5){
+                //   exit(1);
+                // }
+                lastRate = (total * Number(val)) / 100;
+                if (lastRate < lastRate * 1.2) {
+                  //    this.logger.debug(`En az  ölçekte kök var`)
+                  classificationRate.push(1);
+                }
+                if (lastRate < lastRate * 1.4 && lastRate > lastRate * 1.2) {
+                  //     this.logger.debug(`Az ölçekte kök var`)
+                  classificationRate.push(2);
+                }
+
+                if (lastRate < lastRate * 1.6 && lastRate > lastRate * 1.4) {
+                  //    this.logger.debug(` Orta ölçekte kök var`)
+                  classificationRate.push(3);
+                }
+
+                if (lastRate < lastRate * 1.8 && lastRate > lastRate * 1.6) {
+                  //     this.logger.debug(` Çok ölçekte kök var`)
+                  classificationRate.push(4);
+                }
+
+                if (lastRate > lastRate * 1.8) {
+                  //    this.logger.debug(` En çok kök bölgesi`)
+                  classificationRate.push(5);
+                } else {
+                  classificationRate.push(3);
+                }
+                if (dataRateByGreaterThan.length == index) {
+                  return index;
+                }
               });
-              console.log("naber");
               let lastChangeDataArrayStr = Array<string>();
               let classificationRateStr = [];
               lastChangeDataArray.map((x) => {
                 lastChangeDataArrayStr.push(x.toString());
               });
-              this.logger.warn("String array:", lastChangeDataArrayStr);
-              lastChangeDataArray=[];
+              this.logger.warn('String array:', classificationRate.length);
+              lastChangeDataArray = [];
               //  BURADA İSE SINIFLANDIRILMIŞ VERİYİ VERİTABANINA KAYDEDİYORUZ.
               classificationRate.map((x) => {
                 classificationRateStr.push(x.toString());
               });
-             try {
-              this.logger.error("Son kayıt")
-              const resultRecord = await this.smartRootClassificationService.create({
-                contentId: '',
-                createdAt: new Date(),
-                GatewayID: '',
-                isDeleted: false,
-                lastChangedDateTime: new Date(),
-                SensorClasses: classificationRateStr,
-                SensorDatas: lastChangeDataArrayStr,
-                Sensors: root.Sensors,
-                SmartRootID: root.SmartRootID,
-                updatedAt: new Date(),
-              });
-              if (resultRecord.GatewayID) {
-                this.logger.error("başarılı!!!");
+              try {
+                const resultRecord =
+                  await this.smartRootClassificationService.create({
+                    contentId: '',
+                    createdAt: new Date(),
+                    GatewayID: '',
+                    isDeleted: false,
+                    lastChangedDateTime: new Date(),
+                    SensorClasses: classificationRateStr,
+                    SensorDatas: lastChangeDataArrayStr,
+                    Sensors: root.Sensors,
+                    SmartRootID: root.SmartRootID,
+                    updatedAt: new Date(),
+                  });
+                if (resultRecord.GatewayID) {
+                  this.logger.error('başarılı!!!');
+                }
+              } catch (error) {
+                console.log(error);
+                throw new Error(error);
               }
-             } catch (error) {
-              console.log(error);
-              throw new Error(error);
-             }
               this.logger.verbose(
                 `${smart.Name} adlı SmartRoot Kurulumuna ait veriler sınıflandı ve kaydediliyor.`,
               );

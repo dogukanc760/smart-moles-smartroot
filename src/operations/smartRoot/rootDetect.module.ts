@@ -19,6 +19,7 @@ import { ValveCardsModule } from 'src/units/workGroup/valveCards/valveCards/valv
 import { WorkGroupModule } from 'src/units/workGroup/workGroup/workGroup.module';
 import { WorkGroupLogsModule } from 'src/units/workGroup/workGroupLogs/workGroupsLog.module';
 import { RootDetect } from './rootDetect.service';
+import { SmartRootInitializeService } from './SmartRootDetect.service';
 
 @Module({
   imports: [
@@ -39,7 +40,7 @@ import { RootDetect } from './rootDetect.service';
     SmartRootClassificationModule
     
   ],
-  providers: [RootDetect],
-  exports: [RootDetect],
+  providers: [RootDetect, SmartRootInitializeService],
+  exports: [RootDetect, SmartRootInitializeService],
 })
 export class RootDetectModule {}

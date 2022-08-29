@@ -32,9 +32,12 @@ export class WorkGroupService {
   }
 
   public async getByGatewayOne(id: string): Promise<WorkGroupDTO> {
-    return await this.repo
+    console.log("Service:", id)
+    const data = await this.repo
     .findOne({ where:{GatewayID: id} })
     .then((e) => WorkGroupDTO.fromEntity(e));
+    console.log(data);
+    return data;
      
   }
 

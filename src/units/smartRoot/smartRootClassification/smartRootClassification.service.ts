@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SmartRootClassification } from 'src/model/SmartRoot/smartRootClassification.entity';
 import { Repository } from 'typeorm';
 import { SmartRootClassificationDTO } from './smartRootClassification.dto';
+import { SmartRootCreateClassificationDTO } from './smartRootCreateClassification.dto';
 
 
 @Injectable()
@@ -37,6 +38,18 @@ export class SmartRootClassificationService {
       return await this.repo
       .save(SmartRootClassificationDTO.toEntity(dto))
       .then((e) => SmartRootClassificationDTO.fromEntity(e));
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  // save for smartoort detect service
+  public async createDetect(dto: SmartRootCreateClassificationDTO): Promise<SmartRootCreateClassificationDTO> {
+    try {
+      return await this.repo
+      .save(SmartRootCreateClassificationDTO.toEntity(dto))
+      .then((e) => SmartRootCreateClassificationDTO.fromEntity(e));
     } catch (error) {
       console.log(error);
       return error;
