@@ -179,7 +179,7 @@ export class SmartRootInitializeV2Service {
               SensorClasses: this.classificationDataStr,
               SensorDatas: this.classificationDataStr,
               Sensors: this.classificationDataStr,
-              SmartRootID: sec.contentId,
+              SmartRootID: sec.SmartRootID,
               updatedAt: sec.updatedAt,
             });
             this.classificationData = [];
