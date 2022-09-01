@@ -11,6 +11,7 @@ import {
   import { ApiTags } from '@nestjs/swagger';
   import { TransformInterceptor } from 'src/libs/api-results/standart-results';
 import { RootDetect } from 'src/operations/smartRoot/rootDetect.service';
+import { SmartRootInitializeV2Service } from 'src/operations/smartRoot/SmartRootDetClass.service';
 import { SmartRootInitializeService } from 'src/operations/smartRoot/SmartRootDetect.service';
 import { PlantsDTO } from './plants.dto';
 import { PlantService } from './plants.service';
@@ -21,7 +22,7 @@ import { PlantService } from './plants.service';
   @ApiTags('Plants Endpoints')
   @UseInterceptors(TransformInterceptor)
   export class PlantsController {
-    constructor(private plantsService: PlantService, private rootDetect:RootDetect,
+    constructor(private plantsService: PlantService, private rootDetect:RootDetect, private rootv2Detect: SmartRootInitializeV2Service,
       private smartRootDetectService: SmartRootInitializeService) {}
   
     @Get()
@@ -34,8 +35,8 @@ import { PlantService } from './plants.service';
     public async test(): Promise<void> {
       try {
         console.log('asdf')
-       // return await this.rootDetect.Process();
-       return await this.smartRootDetectService.ProcessStep();
+        return await this.rootv2Detect.ProcessStep();
+       //return await this.smartRootDetectService.ProcessStep();
       } catch (error) {
         console.log(error);
         return  error;

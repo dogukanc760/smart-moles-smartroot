@@ -36,6 +36,9 @@ export class WorkGroupService {
     const data = await this.repo
     .findOne({ where:{GatewayID: id} })
     .then((e) => WorkGroupDTO.fromEntity(e));
+    if (data) {
+      
+    }
     console.log(data);
     return data;
      
